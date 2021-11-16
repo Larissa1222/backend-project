@@ -5,6 +5,7 @@ import { routes } from './routes/index';
 import swaggerUi from 'swagger-ui-express'; 
 import swaggerFile from './swagger.json';
 
+import './database'
 
 const app = express();
 const port = 3333;
