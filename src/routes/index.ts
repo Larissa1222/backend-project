@@ -5,6 +5,6 @@ import { specificationRoutes } from './specification.routes';
 const routes = Router();
 
 routes.use('/categories', categoriesRoutes);
-routes.use('/specification', specificationRoutes);
+routes.use('/specifications', specificationRoutes);
 
 export { routes };

@@ -1,12 +1,9 @@
+import multer from 'multer';
 import { Router } from 'express';
 
-import multer from 'multer';
-import {  
-  importCategoryController, 
-  listCategoriesController 
-} from '../modules/cars/useCases';
-
-import  createCategoryController  from '../modules/cars/useCases';
+import { CreateCategoryController } from '../modules/cars/useCases/createCategory/CreateCategoryController';
+import { ImportCategoryController } from '../modules/cars/useCases/importCategories/ImportCategoryController';
+import { ListCategoriesController } from '../modules/cars/useCases/listCategories/ListCategoriesController';
 
 const categoriesRoutes = Router();
 
@@ -14,19 +11,17 @@ const upload = multer({
   dest: './tmp'
 })
 
+const createCategoryController = new CreateCategoryController();
+const importCategoryController = new ImportCategoryController();
+const listCategoriesController = new ListCategoriesController();
 
-categoriesRoutes.post("/", (request, response) => {
-  console.log('RELOAD FUNFA');
-  return createCategoryController.handle(request, response);
-})
+//dessa forma vai funcionar semelhante a um middleware 
+//e no handle ja tem embutido o request e response
+categoriesRoutes.post("/", createCategoryController.handle);
 
-categoriesRoutes.get("/", (request, response) => {
-  return listCategoriesController.handle(request, response);
-})
+categoriesRoutes.get("/", listCategoriesController.handle);
 
-categoriesRoutes.post('/import', upload.single('file'), (request, response) => {
-  return importCategoryController.handle(request, response);
-})
+categoriesRoutes.post('/import', upload.single('file'), importCategoryController.handle);
 
 export { categoriesRoutes };
 

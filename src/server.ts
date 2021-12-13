@@ -1,11 +1,13 @@
 // https://www.notion.so/ESLint-e-Prettier-Trilha-Node-js-d3f3ef576e7f45dfbbde5c25fa662779#340924d1619d48ec8e8220569f298616 NOTION DOC TO USE PRETTIER AND ESLINT
 
+import 'reflect-metadata';
 import express from 'express';
 import { routes } from './routes/index';
 import swaggerUi from 'swagger-ui-express'; 
 import swaggerFile from './swagger.json';
 
 import './database'
+import './shared/container'
 
 const app = express();
 const port = 3333;
