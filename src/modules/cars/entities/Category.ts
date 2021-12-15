@@ -3,7 +3,7 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
 // Pro typeorm entender q essa classe é uma entidade e 
 // vai precisar ser convertida para uma tabela
-@Entity("categories")
+@Entity('categories')
 class Category {
   @PrimaryColumn()
   id?: string;
