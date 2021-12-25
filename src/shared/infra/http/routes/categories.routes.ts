@@ -1,27 +1,31 @@
-import multer from 'multer';
-import { Router } from 'express';
+import multer from "multer";
+import { Router } from "express";
 
-import { CreateCategoryController } from '../modules/cars/useCases/createCategory/CreateCategoryController';
-import { ImportCategoryController } from '../modules/cars/useCases/importCategories/ImportCategoryController';
-import { ListCategoriesController } from '../modules/cars/useCases/listCategories/ListCategoriesController';
+import { CreateCategoryController } from "../../../../modules/cars/useCases/createCategory/CreateCategoryController";
+import { ImportCategoryController } from "../../../../modules/cars/useCases/importCategories/ImportCategoryController";
+import { ListCategoriesController } from "../../../../modules/cars/useCases/listCategories/ListCategoriesController";
 
 const categoriesRoutes = Router();
 
 const upload = multer({
-  dest: './tmp'
-})
+  dest: "./tmp",
+});
 
 const createCategoryController = new CreateCategoryController();
 const importCategoryController = new ImportCategoryController();
 const listCategoriesController = new ListCategoriesController();
 
-//dessa forma vai funcionar semelhante a um middleware 
+//dessa forma vai funcionar semelhante a um middleware
 //e no handle ja tem embutido o request e response
 categoriesRoutes.post("/", createCategoryController.handle);
 
 categoriesRoutes.get("/", listCategoriesController.handle);
 
-categoriesRoutes.post('/import', upload.single('file'), importCategoryController.handle);
+categoriesRoutes.post(
+  "/import",
+  upload.single("file"),
+  importCategoryController.handle
+);
 
 export { categoriesRoutes };
 

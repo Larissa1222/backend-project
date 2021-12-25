@@ -3,7 +3,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
 import { IUsersRepository } from "../../repositories/IUsersRepository";
-import { AppError } from "../../../../errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 
 interface IRequest {
   email: string;
@@ -43,10 +43,10 @@ class AuthUserUseCase {
     //primeiro parametro as info de usuarios nao criticas
     //segundo parametro uma palavra secreta (essa foi gerada por md5)
     //terceiro parametro um obj subject do sign, com expiracao d 1 dia
-    const token = sign({}, "d652eeeea9a382e2b37ad73e0a66b131", {
-      subject: user.id,
-      expiresIn: "1d",
-    });
+    const token = sign(
+      { subject: user.id, expiresIn: "1d" },
+      "d652eeeea9a382e2b37ad73e0a66b131"
+    );
 
     const tokenReturn: IResponse = {
       token,

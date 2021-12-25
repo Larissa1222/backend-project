@@ -1,7 +1,7 @@
-import fs from 'fs';
+import fs from "fs";
 
 //para atualizar a foto do avatar e excluir a antiga
-export const deleteFile = async(filename: string) => {
+export const deleteFile = async (filename: string) => {
   try {
     //verifica se o arquivo existe
     await fs.promises.stat(filename);
@@ -10,4 +10,4 @@ export const deleteFile = async(filename: string) => {
   }
   //remove o arquivo existente
   await fs.promises.unlink(filename);
-}
+};

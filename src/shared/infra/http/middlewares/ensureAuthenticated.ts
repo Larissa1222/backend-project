@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
-import { AppError } from "../errors/AppError";
-import { UsersRepository } from "../modules/accounts/repositories/implementations/UsersRepository";
+
+import { UsersRepository } from "modules/accounts/infra/typeorm/repositories/UsersRepository";
+import { AppError } from "../../../errors/AppError";
 
 interface IPayload {
   sub: string;
@@ -34,14 +35,14 @@ export async function ensureAuthenticated(
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findById(user_id);
     if (!user) {
-      throw new AppError("User doesn't exists!", 401);
+      throw new AppError("User does not exists!", 401);
     }
     //foi necessario sobrescrever a tipagem
     //do express, para poder repassar o id
     //no request do proprio express
     request.user = {
-      id: user_id
-    }
+      id: user_id,
+    };
 
     next();
   } catch (error) {

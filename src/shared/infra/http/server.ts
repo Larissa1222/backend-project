@@ -5,13 +5,13 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 
-import "./database";
+import "../typeorm";
 
-import "./shared/container";
+import "../src/shared/container";
 
-import { AppError } from "./errors/AppError";
-import { routes } from "./routes/index";
-import swaggerFile from "./swagger.json";
+import swaggerFile from "../../../swagger.json";
+import { AppError } from "shared/errors/AppError";
+import { routes } from "./routes";
 
 const app = express();
 const port = 3333;
@@ -31,7 +31,6 @@ app.use(
       response.status(err.statusCode).json({
         message: err.message,
       });
-
     }
     return response.status(500).json({
       status: "error",
