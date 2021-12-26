@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+
 import { UpdateAvatarUseCase } from "./UpdateAvatarUseCase";
 
 class UpdateAvatarController {

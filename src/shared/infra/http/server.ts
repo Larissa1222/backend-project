@@ -5,17 +5,18 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 
-import "../typeorm";
+import createConnection from "../typeorm/index"
 
-import "../src/shared/container";
+import "../../container/index";
 
 import swaggerFile from "../../../swagger.json";
-import { AppError } from "shared/errors/AppError";
+import { AppError } from "../../../shared/errors/AppError";
 import { routes } from "./routes";
 
 const app = express();
 const port = 3333;
 
+createConnection();
 app.use(express.json());
 
 // SWAGGER INIT

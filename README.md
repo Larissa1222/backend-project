@@ -4,13 +4,12 @@
 ## Cadastro de carro
 **Requisitos funcionais:**
 - Deve ser possível cadastrar um novo carro;
-- Deve ser possível listar todas as categorias.
 
 **Regra de negócio:**
 - Não deve ser possivel cadastrar um carro com placa já existente;
-- Não deve ser possível alterar a placa de um carro já cadastrado;
+<!-- - Não deve ser possível alterar a placa de um carro já cadastrado; -->
 - O carro deve ser cadastrado com disponibilidade por padrão;
-- Somente o administrador poderá cadastrar um novo carro.
+- Somente o administrador poderá cadastrar um novo carro (vai ser feito na hr do controller).
 
 
 ## Listagem de carro
