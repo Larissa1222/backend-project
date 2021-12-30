@@ -34,9 +34,7 @@ export async function ensureAuthenticated(
 
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findById(user_id);
-    if (!user) {
-      throw new AppError("User does not exists!", 401);
-    }
+    
     //foi necessario sobrescrever a tipagem
     //do express, para poder repassar o id
     //no request do proprio express
@@ -44,7 +42,10 @@ export async function ensureAuthenticated(
       id: user_id,
     };
 
-    next();
+    if (!user) {
+      throw new AppError("User does not exists!", 401);
+    }    
+    return next();
   } catch (error) {
     throw new AppError("Invalid token", 401);
   }

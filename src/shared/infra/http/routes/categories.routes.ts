@@ -4,6 +4,8 @@ import { Router } from "express";
 import { CreateCategoryController } from "../../../../modules/cars/useCases/createCategory/CreateCategoryController";
 import { ImportCategoryController } from "../../../../modules/cars/useCases/importCategories/ImportCategoryController";
 import { ListCategoriesController } from "../../../../modules/cars/useCases/listCategories/ListCategoriesController";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 
 const categoriesRoutes = Router();
 
@@ -19,8 +21,11 @@ const listCategoriesController = new ListCategoriesController();
 //e no handle ja tem embutido o request e response
 categoriesRoutes.post("/", createCategoryController.handle);
 
+// categoriesRoutes.post("/", ensureAuthenticated, ensureAdmin, createCategoryController.handle);
+
 categoriesRoutes.get("/", listCategoriesController.handle);
 
+//colocar ensure auth e ensure admin também no import
 categoriesRoutes.post(
   "/import",
   upload.single("file"),
