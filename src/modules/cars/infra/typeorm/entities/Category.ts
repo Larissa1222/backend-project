@@ -1,4 +1,4 @@
-import { v4 as uuuidV4 } from "uuid"; // no TS, para sobescrever o nome de algo em um objeto, usamos 'as'
+import { v4 as uuidV4 } from "uuid"; // no TS, para sobescrever o nome de algo em um objeto, usamos 'as'
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
 
@@ -20,7 +20,7 @@ class Category {
 
   constructor() {
     if (!this.id) {
-      this.id = uuuidV4();
+      this.id = uuidV4();
     }
   }
 }

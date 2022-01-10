@@ -1,4 +1,4 @@
-import { v4 as uuuidV4 } from "uuid";
+import { v4 as uuidV4 } from "uuid";
 import {
   Column,
   CreateDateColumn,
@@ -59,7 +59,7 @@ class Car {
 
   constructor() {
     if (!this.id) {
-      this.id = uuuidV4();
+      this.id = uuidV4();
       this.available = true;
     }
   }

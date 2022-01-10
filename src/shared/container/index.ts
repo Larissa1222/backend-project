@@ -4,11 +4,13 @@ import { IUsersRepository } from "modules/accounts/repositories/IUsersRepository
 import { ISpecificationsRepository } from "modules/cars/repositories/ISpecificationsCategory";
 import { ICategoriesRepository } from "modules/cars/repositories/ICategoriesRepository";
 import { ICarsRepository } from "modules/cars/repositories/ICarsRepository";
+import { ICarsImagesRepository } from "modules/cars/repositories/ICarsImagesRepository";
 
 import { UsersRepository } from "../../modules/accounts/infra/typeorm/repositories/UsersRepository";
 import { CategoriesRepository } from "../../modules/cars/infra/typeorm/repositories/CategoriesRepository";
 import { SpecificationsRepository } from "../../modules/cars/infra/typeorm/repositories/SpecificationsRepository";
 import { CarsRepository } from "../../modules/cars/infra/typeorm/repositories/CarsRepository";
+import { CarsImagesRepository } from "../../modules/cars/infra/typeorm/repositories/CarsImagesRepository";
 
 //ICategoriesRepository
 container.registerSingleton<ICategoriesRepository>(
@@ -30,4 +32,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<ICarsRepository>
   ("CarsRepository", 
   CarsRepository
+);
+
+container.registerSingleton<ICarsImagesRepository>
+  ("CarsImagesRepository", 
+  CarsImagesRepository
 );

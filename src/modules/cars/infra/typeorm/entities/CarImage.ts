@@ -1,16 +1,17 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
-@Entity("specifications")
-class Specification {
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+
+@Entity("cars_image")
+class CarImage {
   @PrimaryColumn()
-  id?: string;
+  id: string;
 
   @Column()
-  name: string;
+  car_id: string;
 
   @Column()
-  description: string;
+  image_name: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -22,4 +23,4 @@ class Specification {
   }
 }
 
-export { Specification };
+export { CarImage };
