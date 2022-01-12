@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class Rentals1641777871412 implements MigrationInterface {
+export class CarsRentals1641923775183 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "rentals",
+        name: "cars_rentals",
         columns: [
           {
             name: "id",
@@ -27,6 +27,7 @@ export class Rentals1641777871412 implements MigrationInterface {
           {
             name: "end_date",
             type: "timestamp",
+            isNullable: true,
           },
           {
             name: "expected_return_date",
@@ -35,6 +36,7 @@ export class Rentals1641777871412 implements MigrationInterface {
           {
             name: "total",
             type: "numeric",
+            isNullable: true,
           },
           {
             name: "created_at",
@@ -70,6 +72,6 @@ export class Rentals1641777871412 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("rentals");
+    await queryRunner.dropTable("cars_rentals");
   }
 }

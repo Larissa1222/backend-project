@@ -4,13 +4,16 @@ import { ImportCategoryUseCase } from "./ImportCategoryUseCase";
 
 class ImportCategoryController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { file } = request;
+    try {
+      const { file } = request;
 
-    const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
+      const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
 
-    await importCategoryUseCase.execute(file);
-
-    return response.status(201).send();
+      await importCategoryUseCase.execute(file);
+      return response.status(201).send();
+    } catch (error) {
+      return response.status(500).json({ error: error.message });
+    }
   }
 }
 

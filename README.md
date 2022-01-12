@@ -50,4 +50,5 @@
 **Regra de negócio:**
 - O aluguel deve ter duração mínima de 24h;
 - Não deve ser possível cadastrar mais de um aluguel simultaneamente para o mesmo usuário;
-- Não deve ser possível cadastrar mais de um aluguel simultaneamente para o mesmo carro.
+- Não deve ser possível cadastrar mais de um aluguel simultaneamente para o mesmo carro;
+- O usuário deve estar logado na aplicação.

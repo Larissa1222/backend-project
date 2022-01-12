@@ -5,18 +5,22 @@ import { CreateCarSpecificationUseCase } from "./CreateCarSpecificationUseCase";
 
 class CreateCarSpecificationController {
   async handle(req: Request, res: Response) {
-    const { id } = req.params;
-    const { specifications_id } = req.body;
+    try {
+      const { id } = req.params;
+      const { specifications_id } = req.body;
 
-    const createCarSpecificationUseCase = container.resolve(
-      CreateCarSpecificationUseCase
-    );
+      const createCarSpecificationUseCase = container.resolve(
+        CreateCarSpecificationUseCase
+      );
 
-    const cars = await createCarSpecificationUseCase.execute({
-      car_id: id,
-      specifications_id,
-    });
-    return res.json(cars);
+      const cars = await createCarSpecificationUseCase.execute({
+        car_id: id,
+        specifications_id,
+      });
+      return res.json(cars);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 }
 
