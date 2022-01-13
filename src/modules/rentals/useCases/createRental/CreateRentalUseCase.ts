@@ -31,8 +31,6 @@ class CreateRentalUseCase {
     if (carUnavailable) {
       throw new AppError("Car is unavailable!");
     }
-    console.log("user id", user_id);
-    console.log("car id e expected return date", car_id, expected_return_date);
 
     const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(
       user_id
@@ -48,7 +46,7 @@ class CreateRentalUseCase {
     );
 
     if (compare < 24) {
-      throw new AppError("above minimun hours");
+      throw new AppError("Rental above minimun hours");
     }
 
     return await this.rentalsRepository.create({

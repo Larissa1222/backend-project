@@ -5,7 +5,7 @@ import { UsersRepository } from "../../../../modules/accounts/infra/typeorm/repo
 import { AppError } from "../../../errors/AppError";
 
 interface IPayload {
-  sub: string;
+  subject: string;
 }
 
 export async function ensureAuthenticated(
@@ -27,14 +27,14 @@ export async function ensureAuthenticated(
     //verificar se é um token valido
     //token do auth user usecase
     //se o token for errado cai no catch
-    const { sub: user_id } = verify(
+    const { subject: user_id } = verify(
       token,
       "d652eeeea9a382e2b37ad73e0a66b131"
     ) as IPayload;
 
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findById(user_id);
-    
+
     //foi necessario sobrescrever a tipagem
     //do express, para poder repassar o id
     //no request do proprio express
@@ -44,7 +44,7 @@ export async function ensureAuthenticated(
 
     if (!user) {
       throw new AppError("User does not exists!", 401);
-    }    
+    }
     return next();
   } catch (error) {
     throw new AppError("Invalid token", 401);
