@@ -19,16 +19,15 @@ const listCategoriesController = new ListCategoriesController();
 
 //dessa forma vai funcionar semelhante a um middleware
 //e no handle ja tem embutido o request e response
-categoriesRoutes.post("/", createCategoryController.handle);
-
-// categoriesRoutes.post("/", ensureAuthenticated, ensureAdmin, createCategoryController.handle);
+categoriesRoutes.post("/", ensureAuthenticated, ensureAdmin, createCategoryController.handle);
 
 categoriesRoutes.get("/", listCategoriesController.handle);
 
-//colocar ensure auth e ensure admin também no import
 categoriesRoutes.post(
   "/import",
   upload.single("file"),
+  ensureAdmin,
+  ensureAuthenticated,
   importCategoryController.handle
 );
 

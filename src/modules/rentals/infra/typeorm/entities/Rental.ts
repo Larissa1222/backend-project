@@ -1,8 +1,8 @@
-import { Column, CreateDateColumn, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { Entity } from "typeorm";
 import { v4 as uuidV4 } from "uuid"
 
-@Entity()
+@Entity("cars_rentals")
 class Rental {
   @PrimaryColumn()
   id: string;
@@ -28,7 +28,7 @@ class Rental {
   @CreateDateColumn()
   created_at: Date;
   
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
   
 
