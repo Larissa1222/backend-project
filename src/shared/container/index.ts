@@ -16,13 +16,11 @@ import { CarsRepository } from "../../modules/cars/infra/typeorm/repositories/Ca
 import { CarsImagesRepository } from "../../modules/cars/infra/typeorm/repositories/CarsImagesRepository";
 import { RentalsRepository } from "../../modules/rentals/infra/typeorm/repositories/RentalsRepository";
 
-//ICategoriesRepository
 container.registerSingleton<ICategoriesRepository>(
   "CategoriesRepository",
   CategoriesRepository
 );
 
-//ISpecificationRepository
 container.registerSingleton<ISpecificationsRepository>(
   "SpecificationsRepository",
   SpecificationsRepository

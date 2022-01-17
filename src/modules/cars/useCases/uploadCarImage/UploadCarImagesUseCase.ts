@@ -6,8 +6,13 @@ interface IRequest {
   car_id: string;
   images_name: string[];
 }
-//delete de imagem
-//excluir duplicadas
+
+/**
+ * Oq falta ser feito (e a aula nao vai abordar)
+ * delete de imagem
+ * excluir duplicadas
+ */
+
 @injectable()
 class UploadCarImagesUseCase {
   constructor(
@@ -20,4 +25,5 @@ class UploadCarImagesUseCase {
     });
   }
 }
+
 export { UploadCarImagesUseCase };

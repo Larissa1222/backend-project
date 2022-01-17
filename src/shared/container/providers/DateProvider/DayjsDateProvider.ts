@@ -7,8 +7,10 @@ dayjs.extend(utc);
 
 class DayjsDateProvider implements IDateProvider {
   compareInHours(start_date: Date, end_date: Date): number {
-    //deixar embutido no compareInHours o convert, para nao
-    //precisar chamar os 2 metodos
+    /**
+     * Deixar embutido no compareInHours o convert, para nao 
+     * precisar chamar os 2 metodos
+     */
     const end_date_utc = this.convertToUtc(end_date);
     const start_date_utc = this.convertToUtc(start_date);
 
@@ -19,7 +21,7 @@ class DayjsDateProvider implements IDateProvider {
     return dayjs(date).utc().local().format();
   }
   dateNow(): Date {
-    //metodo para n precisar chamar o dayjs no usecase
+    //Metodo para n precisar chamar o dayjs no usecase
     return dayjs().toDate();
   }
 }

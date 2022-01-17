@@ -25,24 +25,29 @@ class AuthUserUseCase {
     private usersRepository: IUsersRepository
   ) {}
   async execute({ email, password }: IRequest): Promise<IResponse> {
-    //verificar se usuario existe
+    //Verificar se usuario existe
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError("Email or password incorrect.");
     }
-
-    //verificar se a senha ta correta
-    //comparar a senha criptografada pelo bcrypt com a senha do usuario
+    /**
+     * Verificar se a senha ta correta
+     * Comparar a senha criptografada pelo bcrypt com a senha do usuario
+     */
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
       throw new AppError("Email or password incorrect.");
     }
-    //gerar jwt
-    //primeiro parametro as info de usuarios nao criticas
-    //segundo parametro uma palavra secreta (essa foi gerada por md5)
-    //terceiro parametro um obj subject do sign, com expiracao d 1 dia
+
+    /**
+     * Gerar jwt
+     * Primeiro parametro as info de usuarios nao criticas
+     * Segundo parametro uma palavra secreta (essa foi gerada por md5)
+     * Terceiro parametro um obj subject do sign, com expiracao d 1 dia
+     */
+    
     const token = sign(
       { subject: user.id, expiresIn: "1d" },
       "d652eeeea9a382e2b37ad73e0a66b131"

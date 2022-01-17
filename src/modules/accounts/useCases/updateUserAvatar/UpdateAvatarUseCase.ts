@@ -25,7 +25,7 @@ class UpdateAvatarUseCase {
   async execute({ user_id, avatar_file }: IRequest): Promise<void> {
     const user = await this.usersRepository.findById(user_id);
 
-    //para salvar somente o avatar mais recente do usuario
+    //Para salvar somente o avatar mais recente do usuario
     if (user.avatar) {
       await deleteFile(`./tmp/avatar/${user.avatar}`);
     }

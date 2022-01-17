@@ -1,9 +1,11 @@
-import { v4 as uuidV4 } from "uuid"; // no TS, para sobescrever o nome de algo em um objeto, usamos 'as'
+import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
+/**
+ * Pro typeorm entender q essa classe é uma entidade e
+ * vai precisar ser convertida para uma tabela
+ */
 
-// Pro typeorm entender q essa classe é uma entidade e
-// vai precisar ser convertida para uma tabela
 @Entity("categories")
 class Category {
   @PrimaryColumn()

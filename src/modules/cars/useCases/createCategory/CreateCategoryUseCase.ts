@@ -7,8 +7,11 @@ interface IRequest {
   name: string;
   description: string;
 }
-//Dessa forma, o tsrynge vai ser responsavel a inicializar a instância do repositório
-//entao nao vai ser mais usado o new categoriesrepository
+/**
+ * Dessa forma, o tsrynge vai ser responsavel a inicializar a instância do repositório
+ * entao nao vai ser mais usado o new categoriesrepository  
+ */
+
 @injectable()
 class CreateCategoryUseCase {
   constructor(
@@ -20,12 +23,12 @@ class CreateCategoryUseCase {
     const categoryAlreadyExists = await this.categoriesRepository.findByName(
       name
     );
-
+    
     if (categoryAlreadyExists) {
       throw new AppError("Category already exists");
     }
 
-    this.categoriesRepository.create({ name, description });
+    await this.categoriesRepository.create({ name, description });
   }
 }
 

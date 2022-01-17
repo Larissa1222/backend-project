@@ -4,10 +4,12 @@ import {
   ICreateCategoryDTO,
 } from "../ICategoriesRepository";
 
-//foi necessario criar esse arquivo pois se implementasse o
-//categoriesRepository comum, teria de integrar com os demais useCases
-//de categories, e o teste unitário nao tem funcao de testar integracoes
-//portanto, é criado um repositorio em memoria
+/**
+ * Foi necessario criar esse arquivo pois se implementasse o 
+ * categoriesRepository comum, teria de integrar com os demais useCases
+ * de categories, e o teste unitário nao tem funcao de testar integracoes
+ * portanto, é criado um repositorio em memoria
+ */
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository {
   categories: Category[] = [];

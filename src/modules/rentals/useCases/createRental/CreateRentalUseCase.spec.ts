@@ -9,7 +9,7 @@ let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
 let dayjsDateProvider: DayjsDateProvider;
 
 describe("Create Rental", () => {
-  const dayAdd24h = dayjs().add(1, "day").toDate();
+  const dayAdd48h = dayjs().add(2, "day").toDate();
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
     dayjsDateProvider = new DayjsDateProvider();
@@ -23,7 +23,7 @@ describe("Create Rental", () => {
     const rental = await createRentalUseCase.execute({
       user_id: "123567",
       car_id: "1924875",
-      expected_return_date: dayAdd24h,
+      expected_return_date: dayAdd48h,
     });
 
     expect(rental).toHaveProperty("id");
@@ -35,12 +35,12 @@ describe("Create Rental", () => {
       await createRentalUseCase.execute({
         user_id: "123567",
         car_id: "1924875",
-        expected_return_date: dayAdd24h,
+        expected_return_date: dayAdd48h,
       });
       await createRentalUseCase.execute({
         user_id: "123567",
         car_id: "8044498",
-        expected_return_date: dayAdd24h,
+        expected_return_date: dayAdd48h,
       });
     }).rejects.toBeInstanceOf(AppError);
   });
@@ -50,12 +50,12 @@ describe("Create Rental", () => {
       await createRentalUseCase.execute({
         user_id: "123567",
         car_id: "1924875",
-        expected_return_date: dayAdd24h,
+        expected_return_date: dayAdd48h,
       });
       await createRentalUseCase.execute({
         user_id: "1237",
         car_id: "1924875",
-        expected_return_date: dayAdd24h,
+        expected_return_date: dayAdd48h,
       });
     }).rejects.toBeInstanceOf(AppError);
   });

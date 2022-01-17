@@ -2,8 +2,10 @@ import multer from "multer";
 import crypto from "crypto";
 import { resolve } from "path";
 
-//rota pra armazenar a foto do avatar
-//criptografia pra trocar nome do arquivo de foto (p n ter iguais)
+/*
+  Rota pra armazenar a foto do avatar
+  criptografia pra trocar nome do arquivo de foto (p n ter iguais)
+*/
 export default {
   upload(folder: string) {
     return {

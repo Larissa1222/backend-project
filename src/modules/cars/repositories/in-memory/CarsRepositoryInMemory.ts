@@ -36,7 +36,7 @@ class CarsRepositoryInMemory implements ICarsRepository {
     brand: string,
     name: string
   ): Promise<Car[]> {
-    //por ser um array, o find retorna apenas 1, o filter retorna +d 1
+    //Por ser um array, o find retorna apenas 1, o filter retorna +d 1
     const cars = this.cars.filter((car) => {
       if (
         car.available === true ||
@@ -56,4 +56,5 @@ class CarsRepositoryInMemory implements ICarsRepository {
     return this.cars.find((car) => car.id === id);
   }
 }
+
 export { CarsRepositoryInMemory };

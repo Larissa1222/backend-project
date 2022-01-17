@@ -6,14 +6,17 @@ import { ListAvailableCarsUseCase } from "./ListAvailableCarsUseCase";
 class ListAvailableCarsController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      //brand category ou name enviado por params nao por body
+      //Brand category ou name enviado por params nao por body
       const { brand, category_id, name } = request.query;
       const listAvailableCarsUseCase = container.resolve(
         ListAvailableCarsUseCase
       );
 
-      //colocar o as string pq assim força vir como string
-      //caso contrário pode vir um tipo querystring
+      /**
+       * Colocar o as string pq assim força vir como string 
+       * caso contrário pode vir um tipo querystring
+       */
+      
       const cars = await listAvailableCarsUseCase.execute({
         brand: brand as string,
         name: name as string,

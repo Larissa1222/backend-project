@@ -34,7 +34,7 @@ describe("Create category", () => {
         name: "category test",
         description: "category description test",
       };
-      //chamar 2x pois da segunda vai dar erro pq o nome foi repetido
+      //Chamar 2x pois da segunda vai dar erro pq o nome foi repetido
       await createCategoryUseCase.execute({
         name: category.name,
         description: category.description,

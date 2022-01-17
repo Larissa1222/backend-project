@@ -57,9 +57,11 @@ export class CreateSpecificationsCars1640823651645
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    //por ser uma tabela de referencia a outras tabelas
-    //nao pode ser feito o queryrunner drop table, tem de tirar os fk
-    //primeiro pra depois fazer o drop
+    /**
+     * Por ser uma tabela de referencia a outras tabelas 
+     * nao pode ser feito o queryrunner drop table, 
+     * tem de tirar os fk primeiro pra depois fazer o drop
+     */
     await queryRunner.dropForeignKey(
       "specifications_cars",
       "FKSpecificationCar"
