@@ -1,9 +1,11 @@
+import { inject, injectable } from "tsyringe";
+
 import { AppError } from "../../../../shared/errors/AppError";
 import { Rental } from "../../infra/typeorm/entities/Rental";
 
 import { IRentalsRepository } from "../../repositories/IRentalsRepository";
 import { IDateProvider } from "../../../../shared/container/providers/DateProvider/IDateProvider";
-import { inject, injectable } from "tsyringe";
+import { ICarsRepository } from "../../../cars/repositories/ICarsRepository";
 
 interface IRequest {
   user_id: any;
@@ -17,7 +19,9 @@ class CreateRentalUseCase {
     @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
     @inject("DayjsDateProvider")
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository
   ) {}
 
   async execute({
@@ -48,6 +52,8 @@ class CreateRentalUseCase {
     if (compare < 24) {
       throw new AppError("Rental above minimun hours");
     }
+    
+    await this.carsRepository.updateAvailable(car_id, false);
 
     return await this.rentalsRepository.create({
       user_id,
