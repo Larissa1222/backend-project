@@ -47,6 +47,7 @@
 ## Aluguel de carro
 **Requisitos funcionais:**
 - Deve ser possível cadastrar um aluguel.
+
 **Regra de negócio:**
 - O aluguel deve ter duração mínima de 24h;
 - Ao realizar um aluguel, o status do carro deverá alterado para indisponível;
@@ -67,3 +68,9 @@
 - Caso o horário de devolução seja superior ao previsto, deverá ser cobrado multa proporcional ao atraso;
 - Caso haja multa, deverá ser somado ao valor do aluguel;
 - O usuário deve estar logado na aplicação.
+
+## Listagem de Aluguéis para usuário
+**Requisitos funcionais:**
+- Deve ser possível realizar a busca de todos os aluguéis para o usuário.
+
+**Requisitos não funcionais**
