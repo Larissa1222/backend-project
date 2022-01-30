@@ -19,12 +19,12 @@ describe("Create Car Specification", () => {
   });
 
   it("shouldnt be able to add a new specification into non-existent car", async () => {
-    expect(async () => {
-      await createCarSpecificationUseCase.execute({
+    await expect(
+      createCarSpecificationUseCase.execute({
         car_id: "1234",
         specifications_id: ["56789"],
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError("Car doesnt exists!"));
   });
 
   it("should be able to add a new specification into car", async () => {
@@ -40,8 +40,8 @@ describe("Create Car Specification", () => {
 
     const specification = await specificationsRepository.create({
       description: "specification test",
-      name: "specification name"
-    })
+      name: "specification name",
+    });
 
     const specifications_id = [specification.id];
 
@@ -52,6 +52,5 @@ describe("Create Car Specification", () => {
 
     expect(specificationsCars).toHaveProperty("specifications");
     expect(specificationsCars.specifications.length).toBe(1);
-
   });
 });

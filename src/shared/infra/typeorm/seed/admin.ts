@@ -13,5 +13,13 @@ async function create() {
       values('${id}', 'admin', '${password}', 'admin@rentx.com', true, 'now()', '123456' )
   `);
   await connection.close;
+
 }
+/**
+ * Para criar usuario admin rodar yarn seed:admin e descomentar esse codigo abaixo
+ * create().then(() => {
+ *   console.log("user admin created"); 
+ * });
+ */
+
 

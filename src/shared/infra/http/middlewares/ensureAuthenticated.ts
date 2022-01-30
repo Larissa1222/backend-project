@@ -37,7 +37,7 @@ export async function ensureAuthenticated(
 
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findById(user_id);
-
+    
     /**
      * Foi necessario sobrescrever a tipagem do express, 
      * para poder repassar o id no request do proprio express

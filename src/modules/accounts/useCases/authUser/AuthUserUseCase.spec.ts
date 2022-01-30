@@ -1,8 +1,10 @@
 import { AppError } from "../../../../shared/errors/AppError";
-import { UsersRepositoryInMemory } from "../../repositories/in-memory/UsersRepositoryInMemory";
+
 import { ICreateUserDTO } from "../../repositories/IUsersRepository";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthUserUseCase } from "./AuthUserUseCase";
+
+import { UsersRepositoryInMemory } from "../../repositories/in-memory/UsersRepositoryInMemory";
 
 let authUserUseCase: AuthUserUseCase;
 let userRepositoryInMemory: UsersRepositoryInMemory;
@@ -30,28 +32,29 @@ describe("Authenticate user", () => {
     expect(result).toHaveProperty("token");
   });
 
-  it("should not be able to authenticate a nonexistent user", () => {
-    expect(async () => {
-      const result = await authUserUseCase.execute({
+  it("should not be able to authenticate a nonexistent user", async () => {
+    await expect(
+      authUserUseCase.execute({
         email: "fake@email.com",
         password: "qwertyui",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError("Email or password incorrect."));
   });
 
-  it("should not be able to authenticate with incorrect password", () => {
-    expect(async () => {
-      const user: ICreateUserDTO = {
-        driver_license: "888888",
-        email: "teste@teste.com",
-        password: "qawsedrf",
-        name: "User Test Error",
-      };
-      await createUserUseCase.execute(user);
-      await authUserUseCase.execute({
+  it("should not be able to authenticate with incorrect password", async () => {
+    const user: ICreateUserDTO = {
+      driver_license: "888888",
+      email: "teste@teste.com",
+      password: "qawsedrf",
+      name: "User Test Error",
+    };
+    await createUserUseCase.execute(user);
+
+    await expect(
+      authUserUseCase.execute({
         email: user.email,
         password: "fon",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError("Email or password incorrect."));
   });
 });
