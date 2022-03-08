@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
-import { UsersRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersRepository";
 import { AppError } from "../../../errors/AppError";
+import auth from "../../../../config/auth";
+
+import { UsersTokensRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
 
 interface IPayload {
-  subject: string;
+  sub: string;
 }
 
 export async function ensureAuthenticated(
@@ -14,6 +16,8 @@ export async function ensureAuthenticated(
   next: NextFunction
 ) {
   const authHeader = request.headers.authorization;
+
+  const userTokensRepository = new UsersTokensRepository();
   if (!authHeader) {
     throw new AppError("Token missing", 401);
   }
@@ -30,14 +34,13 @@ export async function ensureAuthenticated(
      * Verificar se é um token valido token do
      * auth user usecase se o token for errado cai no catch
      */
-    const { subject: user_id } = verify(
+    //inserido token do refresh
+    const { sub: user_id } = verify(
       token,
-      "d652eeeea9a382e2b37ad73e0a66b131"
+      auth.secret_refresh_token,
     ) as IPayload;
 
-    const usersRepository = new UsersRepository();
-    const user = await usersRepository.findById(user_id);
-    
+    const user = await userTokensRepository.findByUserIdAndToken(user_id, token);
     /**
      * Foi necessario sobrescrever a tipagem do express, 
      * para poder repassar o id no request do proprio express

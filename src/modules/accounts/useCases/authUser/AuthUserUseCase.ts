@@ -66,10 +66,12 @@ class AuthUserUseCase {
       subject: user.id,
       expiresIn: auth.expires_in_refresh_token,
     });
-
+    /**
+     * Nao tem o refresh_token_expires_date pois está sendo feito direto no expires_date
+     */
     await this.usersTokensRepository.create({
       user_id: user.id,
-      refresh_token,
+      refresh_token: refresh_token,
       expires_date: this.dateProvider.addDays(auth.expires_refresh_token_days),
     });
 
