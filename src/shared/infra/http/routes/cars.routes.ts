@@ -5,10 +5,14 @@ import { ensureAdmin } from "../middlewares/ensureAdmin";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import uploadConfig from "../../../../config/upload";
 
-import { ListAvailableCarsController } from "../../../../modules/cars/useCases/listAvailableCars/ListAvailableCarsController";
-import { CreateCarController } from "../../../../modules/cars/useCases/createCar/CreateCarController";
-import { CreateCarSpecificationController } from "../../../../modules/cars/useCases/createCarSpecification/CreateCarSpecificationController";
-import { UploadCarImagesController } from "../../../../modules/cars/useCases/uploadCarImage/UploadCarImagesController";
+import { ListAvailableCarsController } from
+  "../../../../modules/cars/useCases/listAvailableCars/ListAvailableCarsController";
+import { CreateCarController } from
+  "../../../../modules/cars/useCases/createCar/CreateCarController";
+import { CreateCarSpecificationController } from
+  "../../../../modules/cars/useCases/createCarSpecification/CreateCarSpecificationController";
+import { UploadCarImagesController } from
+  "../../../../modules/cars/useCases/uploadCarImage/UploadCarImagesController";
 
 const carsRoutes = Router();
 
