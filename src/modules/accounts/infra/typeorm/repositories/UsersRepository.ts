@@ -3,7 +3,7 @@ import { getRepository, Repository } from "typeorm";
 import {
   ICreateUserDTO,
   IUsersRepository,
-} from "modules/accounts/repositories/IUsersRepository";
+} from "../../../repositories/IUsersRepository";
 import { User } from "../entities/User";
 
 class UsersRepository implements IUsersRepository {
@@ -33,12 +33,10 @@ class UsersRepository implements IUsersRepository {
     await this.repository.save(user);
   }
   async findByEmail(email: string): Promise<User> {
-    const user = await this.repository.findOne({ email });
-    return user;
+    return this.repository.findOne({ email });
   }
   async findById(id: string): Promise<User> {
-    const user = await this.repository.findOne(id);
-    return user;
+    return this.repository.findOne(id);
   }
 }
 
