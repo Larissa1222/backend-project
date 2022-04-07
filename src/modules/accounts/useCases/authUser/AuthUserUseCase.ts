@@ -37,6 +37,13 @@ class AuthUserUseCase {
     //Verificar se usuario existe
     const user = await this.usersRepository.findByEmail(email);
 
+    const {
+      secret_token,
+      expires_in_token,
+      secret_refresh_token,
+      expires_in_refresh_token,
+    } = auth;
+
     if (!user) {
       throw new AppError("Email or password incorrect.");
     }
@@ -57,14 +64,14 @@ class AuthUserUseCase {
      * Terceiro parametro um obj subject do sign, com expiracao d 1 dia
      */
 
-    const token = sign(
-      { subject: user.id, expiresIn: auth.expires_in_token },
-      auth.secret_token
-    );
+    const token = sign({}, secret_token, {
+      subject: String(user.id),
+      expiresIn: expires_in_token
+    });
 
-    const refresh_token = sign({ email }, auth.secret_refresh_token, {
-      subject: user.id,
-      expiresIn: auth.expires_in_refresh_token,
+    const refresh_token = sign({ email }, secret_refresh_token, {
+      subject: String(user.id),
+      expiresIn: expires_in_refresh_token,
     });
     /**
      * Nao tem o refresh_token_expires_date pois está sendo feito direto no expires_date

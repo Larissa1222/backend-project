@@ -1,20 +1,33 @@
-import { UserTokens } from "modules/accounts/infra/typeorm/entities/UserTokens";
+import { UserTokens } from "../../infra/typeorm/entities/UserTokens";
 import { ICreateUserTokenDTO, IUsersTokensRepository } from "../IUsersTokensRepository";
 
 class UsersTokensRepositoryInMemory implements IUsersTokensRepository {
-  userTokens: UserTokens[] = [];
-  create({ user_id, expires_date, refresh_token, }: ICreateUserTokenDTO): Promise<UserTokens> {
-    throw new Error("Method not implemented.");
+  usersTokens: UserTokens[] = [];
+
+  async create({ user_id, expires_date, refresh_token, }: ICreateUserTokenDTO): Promise<UserTokens> {
+    const userToken = new UserTokens();
+    Object.assign(userToken, {
+      expires_date,
+      refresh_token,
+      user_id
+    });
+    this.usersTokens.push(userToken);
+    return userToken;
   }
-  findByUserIdAndToken(user_id: string, refresh_token: string): Promise<UserTokens> {
-    throw new Error("Method not implemented.");
+
+  async findByUserIdAndToken(user_id: string, refresh_token: string): Promise<UserTokens> {
+    return this.usersTokens.find(ut => ut.user_id === user_id && ut.refresh_token === refresh_token);
   }
-  deleteById(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async deleteById(id: string): Promise<void> {
+    const userToken = this.usersTokens.find(ut => ut.id === id);
+    this.usersTokens.splice(this.usersTokens.indexOf(userToken));
   }
-  findByRefreshToken(refresh_token: string): Promise<UserTokens> {
-    throw new Error("Method not implemented.");
+
+  async findByRefreshToken(refresh_token: string): Promise<UserTokens> {
+    return this.usersTokens.find(ut => ut.refresh_token === refresh_token);
   }
+
 
 }
 export { UsersTokensRepositoryInMemory }
