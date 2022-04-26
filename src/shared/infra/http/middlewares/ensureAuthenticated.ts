@@ -4,8 +4,6 @@ import { verify } from "jsonwebtoken";
 import { AppError } from "../../../errors/AppError";
 import auth from "../../../../config/auth";
 
-import { UsersTokensRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
-
 interface IPayload {
   sub: string;
 }
@@ -17,7 +15,6 @@ export async function ensureAuthenticated(
 ) {
   const authHeader = request.headers.authorization;
 
-  const userTokensRepository = new UsersTokensRepository();
   if (!authHeader) {
     throw new AppError("Token missing", 401);
   }
@@ -37,10 +34,9 @@ export async function ensureAuthenticated(
     //inserido token do refresh
     const { sub: user_id } = verify(
       token,
-      auth.secret_refresh_token,
+      auth.secret_token,
     ) as IPayload;
 
-    const user = await userTokensRepository.findByUserIdAndToken(user_id, token);
     /**
      * Foi necessario sobrescrever a tipagem do express, 
      * para poder repassar o id no request do proprio express
@@ -50,9 +46,6 @@ export async function ensureAuthenticated(
       id: user_id,
     };
 
-    if (!user) {
-      throw new AppError("User does not exists!", 401);
-    }
     return next();
   } catch (error) {
     throw new AppError("Invalid token", 401);
