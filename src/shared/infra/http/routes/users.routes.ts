@@ -8,13 +8,16 @@ import { CreateUserController } from
   "../../../../modules/accounts/useCases/createUser/CreateUserController";
 import { UpdateAvatarController } from
   "../../../../modules/accounts/useCases/updateUserAvatar/UpdateAvatarController";
+import { ProfileUserController } from
+  "../../../../modules/accounts/useCases/profileUser/ProfileUserController";
 
 const usersRoutes = Router();
 
-const uploadAvatar = multer(uploadConfig.upload("./tmp/avatar"));
+const uploadAvatar = multer(uploadConfig);
 
 const createUserController = new CreateUserController();
 const updateAvatarController = new UpdateAvatarController();
+const profileUserController = new ProfileUserController();
 
 usersRoutes.post("/", createUserController.handle);
 
@@ -25,5 +28,7 @@ usersRoutes.patch(
   uploadAvatar.single("avatar"),
   updateAvatarController.handle
 );
+
+usersRoutes.get("/profile", ensureAuthenticated, profileUserController.handle)
 
 export { usersRoutes };

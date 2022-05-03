@@ -1,6 +1,7 @@
 // https://www.notion.so/ESLint-e-Prettier-Trilha-Node-js-d3f3ef576e7f45dfbbde5c25fa662779#340924d1619d48ec8e8220569f298616 NOTION DOC TO USE PRETTIER AND ESLINT
 
 import "reflect-metadata";
+import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";

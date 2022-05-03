@@ -3,16 +3,24 @@ import { resolve } from "path";
 import { IStorageProvider } from "./IStorageProvider";
 import upload from "../../../../config/upload";
 
-class LocalStorageProvider implements IStorageProvider {
+export class LocalStorageProvider implements IStorageProvider {
   async save(file: string, folder: string): Promise<string> {
-    fs.promises.rename(
-      resolve(upload)
-    )
+    await fs.promises.rename(
+      resolve(upload.tmpFolder, file), // old path
+      resolve(`${upload.tmpFolder}/${folder}`, file) // new path
+    );
+    return file;
   }
+
   async delete(file: string, folder: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    const filePath = resolve(`${upload.tmpFolder}/${folder}`, file);
+
+    try {
+      await fs.promises.stat(filePath);
+    } catch {
+      return;
+    }
+
+    fs.promises.unlink(filePath);
   }
-
 }
-
-export { LocalStorageProvider }

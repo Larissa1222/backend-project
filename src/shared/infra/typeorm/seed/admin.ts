@@ -12,8 +12,7 @@ async function create() {
     INSERT INTO USERS(id, name, password, email, "isAdmin", created_at, driver_license)
       values('${id}', 'admin', '${password}', 'admin@rentx.com', true, 'now()', '123456' )
   `);
-  await connection.close;
-
+  connection.close;
 }
 /**
  * Para criar usuario admin rodar yarn seed:admin e descomentar esse codigo abaixo
