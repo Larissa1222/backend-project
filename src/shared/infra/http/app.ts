@@ -13,6 +13,7 @@ import "../../container/index";
 import swaggerFile from "../../../swagger.json";
 import { AppError } from "../../../shared/errors/AppError";
 import { routes } from "./routes";
+import upload from "../../../config/upload";
 
 const app = express();
 
@@ -29,6 +30,10 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
   e tudo que vier a partir dela vai no router
 */
 app.use(routes);
+
+//Pra verificar o tmp/.. e fazer leitura e retornar
+app.use("/avatar", express.static(`${upload.tmpFolder}/avatar`));
+app.use("/cars", express.static(`${upload.tmpFolder}/cars`));
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
