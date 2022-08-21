@@ -2,10 +2,9 @@ import { v4 as uuidV4 } from "uuid";
 import { Expose } from "class-transformer";
 
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
-import { urlencoded } from "express";
 
 @Entity("users")
-class User {
+export class User {
   @PrimaryColumn()
   id: string;
 
@@ -50,4 +49,3 @@ class User {
     }
   }
 }
-export { User };

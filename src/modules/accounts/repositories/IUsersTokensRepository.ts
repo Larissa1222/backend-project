@@ -6,7 +6,7 @@ export interface ICreateUserTokenDTO {
   refresh_token: string;
 }
 
-interface IUsersTokensRepository {
+export interface IUsersTokensRepository {
   create({
     user_id,
     expires_date,
@@ -19,5 +19,3 @@ interface IUsersTokensRepository {
   
   findByRefreshToken(refresh_token: string): Promise<UserTokens>;
 }
-
-export { IUsersTokensRepository };

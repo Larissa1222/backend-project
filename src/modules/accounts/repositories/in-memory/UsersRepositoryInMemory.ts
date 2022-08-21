@@ -1,7 +1,7 @@
 import { User } from "../../infra/typeorm/entities/User";
 import { ICreateUserDTO, IUsersRepository } from "../IUsersRepository";
 
-class UsersRepositoryInMemory implements IUsersRepository {
+export class UsersRepositoryInMemory implements IUsersRepository {
   users: User[] = [];
 
   async create({
@@ -31,5 +31,3 @@ class UsersRepositoryInMemory implements IUsersRepository {
     return this.users.find((user) => user.id === id);
   }
 }
-
-export { UsersRepositoryInMemory };

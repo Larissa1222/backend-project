@@ -1,7 +1,7 @@
 import { UserTokens } from "../../infra/typeorm/entities/UserTokens";
 import { ICreateUserTokenDTO, IUsersTokensRepository } from "../IUsersTokensRepository";
 
-class UsersTokensRepositoryInMemory implements IUsersTokensRepository {
+export class UsersTokensRepositoryInMemory implements IUsersTokensRepository {
   usersTokens: UserTokens[] = [];
 
   async create({ user_id, expires_date, refresh_token, }: ICreateUserTokenDTO): Promise<UserTokens> {
@@ -27,7 +27,4 @@ class UsersTokensRepositoryInMemory implements IUsersTokensRepository {
   async findByRefreshToken(refresh_token: string): Promise<UserTokens> {
     return this.usersTokens.find(ut => ut.refresh_token === refresh_token);
   }
-
-
 }
-export { UsersTokensRepositoryInMemory }

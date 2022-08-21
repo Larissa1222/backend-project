@@ -6,7 +6,7 @@ import {
 } from "../../../repositories/IUsersRepository";
 import { User } from "../entities/User";
 
-class UsersRepository implements IUsersRepository {
+export class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;
 
   constructor() {
@@ -39,5 +39,3 @@ class UsersRepository implements IUsersRepository {
     return this.repository.findOne(id);
   }
 }
-
-export { UsersRepository };
